@@ -9,9 +9,12 @@
 <div>
   file to unzip: <input type="file" id="file" name="file" />
 </div>
-<word-docx data-file="#file" var-name="docx"></word-docx>
+<word-docx data-file="#file" var-name="docx" enable-css="true"></word-docx>
 <div>something below</div>
 <script>
+  document.onselectionchange = (evt) => {
+    console.log('sel changed')
+  }
   document.querySelector('word-docx').addEventListener('file-loaded', (evt) => {
     const doc = evt.detail.wordDoc
     doc.setCssClass('masking', {
@@ -25,13 +28,41 @@
         'val': 'true',
       },
     })
+
+    // doc.overrideFormat({
+    //   from: {
+    //     node: {
+    //       info: {
+    //         paraId: '4D5680C1',
+    //         countTag: 't',
+    //         tTagIndex: 1,
+    //       },
+    //     },
+    //     textOffset: 2,
+    //   },
+    //   to: {
+    //     node: {
+    //       info: {
+    //         paraId: '6A440BCB',
+    //         countTag: 't',
+    //         tTagIndex: 3,
+    //       }
+    //     },
+    //     textOffset: 0,
+    //   },
+    //   format: {
+    //     cssClasses: [
+    //       'masking',
+    //     ],
+    //   },
+    // })
+
     doc.overrideFormat({
       from: {
         node: {
           info: {
             paraId: '4D5680C1',
-            countTag: 't',
-            countIndex: 1,
+            tTagIndex: 1,
           },
         },
         textOffset: 2,
@@ -39,12 +70,11 @@
       to: {
         node: {
           info: {
-            paraId: '6A440BCB',
-            countTag: 't',
-            countIndex: 3,
+            paraId: '4D5680C1',
+            tTagIndex: 1,
           }
         },
-        textOffset: 0,
+        textOffset: 4,
       },
       format: {
         cssClasses: [
@@ -52,6 +82,7 @@
         ],
       },
     })
+
   })
 </script>
 </body>
