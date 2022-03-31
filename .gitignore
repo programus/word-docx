@@ -134,3 +134,6 @@ dist
 
 # debug files
 examples/unzipped
+
+# macOS
+.DS_Store
